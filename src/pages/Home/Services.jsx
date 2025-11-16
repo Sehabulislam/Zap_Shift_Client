@@ -1,5 +1,5 @@
 import StandardDelivery from "../../assets/icon/standard-shipping.png";
-import NationDelivery from "../../assets/icon/cash-on-delivery.png";
+import NationDelivery from "../../assets/icon/all-embracing.png";
 import Fulfillment from "../../assets/icon/business.png";
 import HomeDelivery from "../../assets/icon/money.png";
 import Corporate from "../../assets/icon/corporate.png";

@@ -33,7 +33,7 @@ const howWorks = [
 const HowWorks = () => {
   return (
     <div className="pb-10">
-      <h1 className="text-4xl py-5 font-bold text-[#03373D]">How it Works</h1>
+      <h1 className="text-3xl py-5 font-bold text-[#03373D]">How it Works</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:w-11/12 mx-auto">
         {howWorks.map((work) => (
           <div className="w-full bg-white flex flex-col justify-center gap-4 p-2 px-2 md:p-5 rounded-2xl shadow-xl text-[#03373D]">
