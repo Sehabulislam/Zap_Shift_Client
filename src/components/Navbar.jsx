@@ -55,8 +55,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="shadow-sm">
-      <div className="navbar bg-base-100 md:w-11/12 mx-auto ">
+     <div className="navbar rounded-2xl mb-2 bg-base-100 md:w-11/12 mx-auto ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -93,10 +92,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {/* <a className="btn p-5 text-lg">Button</a> */}
-        <Link className="btn btn-neutral btn-outline rounded-lg md:p-5 text-lg text-gray-600 hover:text-white border-gray-400 shadow-none mr-2">Sign In</Link>
-        <Link className="btn bg-[#CAEB66] rounded-lg text md:p-5 text-lg">Be a rider</Link>
+        <Link className="btn btn-neutral btn-outline rounded-lg md:p-5 md:text-lg text-gray-600 hover:text-white border-gray-400 shadow-none mr-2">Sign In</Link>
+        <Link className="btn bg-[#CAEB66] rounded-lg text md:p-5 md:text-lg">Be a rider</Link>
       </div>
-    </div>
     </div>
   );
 };

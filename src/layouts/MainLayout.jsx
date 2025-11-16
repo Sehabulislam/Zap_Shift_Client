@@ -5,9 +5,9 @@ import Footer from '../components/Footer';
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className='bg-[#EAECED]'>
             <Navbar></Navbar>
-            <main className='min-h-[calc(100vh-402px)] w-11/12 mx-auto'>
+            <main className='min-h-[calc(100vh-402px)] p-2 lg:w-11/12 mx-auto'>
                 <Outlet></Outlet>
             </main>
             <Footer></Footer>
