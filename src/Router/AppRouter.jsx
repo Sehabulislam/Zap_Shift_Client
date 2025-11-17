@@ -6,6 +6,9 @@ import Coverage from "../pages/Coverage";
 import AboutUs from "../pages/AboutUs";
 import Pricing from "../pages/Pricing";
 import BeRider from "../pages/BeRider";
+import Error from "../pages/Error";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +40,18 @@ export const router = createBrowserRouter([
         path: "/aRider",
         element: <BeRider></BeRider>,
       },
+      {
+        path: "*",
+        element: <Error></Error> ,
+      },
     ],
   },
+  {
+    path : '/login',
+    element : <Login></Login>
+  },
+  {
+    path : '/register',
+    element : <Register></Register>
+  }
 ]);

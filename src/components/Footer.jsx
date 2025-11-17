@@ -4,7 +4,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-horizontal footer-center bg-black py-10 text-white">
+    <footer className="footer footer-horizontal footer-center bg-black px-3 py-10 text-white">
       <div className="">
         <div className="relative">
           <h2 className="text-2xl md:text-3xl font-extrabold ">ZapShift</h2>
