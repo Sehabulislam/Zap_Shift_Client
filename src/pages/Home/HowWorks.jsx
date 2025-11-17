@@ -35,8 +35,8 @@ const HowWorks = () => {
     <div className="pb-10">
       <h1 className="text-3xl py-5 font-bold text-[#03373D]">How it Works</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:w-11/12 mx-auto">
-        {howWorks.map((work) => (
-          <div className="w-full bg-white flex flex-col justify-center gap-4 p-2 px-2 md:p-5 rounded-2xl shadow-xl text-[#03373D]">
+        {howWorks.map((work,indx) => (
+          <div key={indx} className="w-full bg-white flex flex-col justify-center gap-4 p-2 px-2 md:p-5 rounded-2xl shadow-xl text-[#03373D]">
             <img src={work.image} alt="deliveryImg" className="w-15 mx-auto lg:mx-0" />
             <h1 className="text-xl md:text-2xl font-bold text-">{work.title}</h1>
             <p>{work.description}</p>

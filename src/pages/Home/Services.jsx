@@ -59,7 +59,7 @@ const Services = () => {
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="bg-white h-auto flex flex-col justify-start gap-4 p-5 rounded-2xl shadow-xl text-[#03373D]"
+            className="bg-white hover:bg-[#CAEB66] h-auto flex flex-col justify-start gap-4 p-5 rounded-2xl shadow-xl text-[#03373D] transition duration-300"
           >
             <img
               src={service.image}
