@@ -1,63 +1,84 @@
-import { useState } from "react";
 import loginImg from "../../assets/authImage.png";
-import uploadIcon from "../../assets/image-upload-icon.png";
 import logo from "../../assets/logo.png";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-  const [photo, setPhoto] = useState("");
-  const { registerUser, setUser, updateUserProfile } = useAuth();
+  const { registerUser, setUser, updateUserProfile, googleSignIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
+  console.log(location);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleRegister = (data, e) => {
-    const photo = e.target.photo.value;
+  const handleRegister = (data) => {
+    const profileImg = data.photo[0];
+
     registerUser(data.email, data.password)
       .then((result) => {
-        updateUserProfile({
-          displayName: data.name,
-          photoURL: photo,
-        })
-          .then(() => {
-            setUser({
-              ...result.user,
-              displayName: data.name,
-              photoURL: photo,
+        //store the image and get the photo url
+        const formData = new FormData();
+        formData.append("image", profileImg);
+        const image_API_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${
+          import.meta.env.VITE_image_host_key
+        }`;
+        axios.post(image_API_URL, formData).then((res) => {
+          // console.log("after image upload", res.data.data.url);
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUserProfile(userProfile)
+            .then(() => {
+              setUser({
+                ...result.user,
+                userProfile,
+              });
+              toast.success("Your Account Login Successfully.");
+              navigate(location?.state || '/');
+            })
+            .catch((error) => {
+              toast.error(error.message);
             });
-            toast.success("Your Account Login Successfully.");
-            navigate("/");
-          })
-          .catch((error) => {
-            toast.error(error.message);
-          });
+        });
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        setUser(result.user);
+        toast.success("Your Account Create Successfully.");
+        navigate(location?.state || '/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
   return (
     <div className="pb-10">
-      <div className="relative block lg:hidden ml-5">
+      <Link to={"/"} className="relative block lg:hidden ml-5">
         <h2 className="text-xl md:text-2xl font-extrabold mt-5 ml-3 p-3">
           ZapShift
         </h2>
         <img src={logo} alt="logo" className="absolute w-10 -top-2 p-1" />
-      </div>
+      </Link>
       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 w-10/12 lg:w-11/12 mx-auto">
         <div className="md:py-10">
-          <div className="relative hidden lg:block">
+          <Link to={"/"} className="relative hidden lg:block">
             <h2 className="text-xl md:text-2xl font-extrabold ml-3 p-3">
               ZapShift
             </h2>
             <img src={logo} alt="logo" className="absolute w-10 -top-2 p-1" />
-          </div>
+          </Link>
           <div className="full lg:w-110 mx-auto space-y-5 lg:py-10">
             <div className="">
               <h1 className="text-4xl md:text-5xl font-bold">
@@ -67,29 +88,6 @@ const Register = () => {
             </div>
             {/* form  */}
             <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
-              <div className="dropdown dropdown-right dropdown-center">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-10 rounded-full">
-                    <img src={photo || uploadIcon} />
-                  </div>
-                </div>
-                <ul
-                  tabIndex="-1"
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 ml-1 w-70 md:w-100 p-2 shadow"
-                >
-                  <input
-                    type="url"
-                    name="photo"
-                    className="input input-lg w-65 md:w-full"
-                    placeholder="Your Photo URL"
-                    onChange={(e) => setPhoto(e.target.value)}
-                  />
-                </ul>
-              </div>
               <div>
                 <label>Name</label>
                 <input
@@ -112,6 +110,17 @@ const Register = () => {
                 />
                 {errors.email?.type === "required" && (
                   <p className="text-red-500">Email is required</p>
+                )}
+              </div>
+              <div className="">
+                <label>Photo</label>
+                <input
+                  type="file"
+                  {...register("photo", { required: true })}
+                  className="file-input file-input-neutral w-full input-lg"
+                />
+                {errors.photo?.type === "required" && (
+                  <p className="text-red-500">Photo is required</p>
                 )}
               </div>
               <div>
@@ -152,12 +161,15 @@ const Register = () => {
             </form>
             <h1>
               Already have an account?{" "}
-              <Link to={"/login"} className="text-lime-600 hover:underline">
+              <Link state={location.stated} to={"/login"} className="text-lime-600 hover:underline">
                 Login
               </Link>
             </h1>
             <div className="divider">OR</div>
-            <button className="btn bg-gray-100 border-none md:text-lg text-black border-[#e5e5e5] w-full p-5">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn bg-gray-100 border-none md:text-lg text-black border-[#e5e5e5] w-full p-5"
+            >
               <FcGoogle size={28} />
               Login with Google
             </button>

@@ -2,14 +2,16 @@ import React from "react";
 import loginImg from "../../assets/authImage.png";
 import logo from "../../assets/logo.png";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { signInUser } = useAuth();
+  const { signInUser,googleSignIn,setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
+  console.log('in the login page',location);
   const {
       register,
       handleSubmit,
@@ -20,30 +22,41 @@ const Login = () => {
 
     signInUser(data.email, data.password)
       .then((result) => {
-        console.log(result);
+        setUser(result);
         toast.success("Your Account Create Successfully.");
-        navigate("/");
+        navigate(location?.state || '/');
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
       });
   };
+  const handleGoogleSignIn =()=>{
+    googleSignIn()
+    .then(result =>{
+      setUser(result.user);
+      toast.success("Your Account Create Successfully.");
+        navigate(location?.state || '/');
+    }).catch(error =>{
+      toast.error(error.message);
+    })
+  }
+
   return (
     <div className="pb-10">
-      <div className="relative block lg:hidden ml-5">
+      <Link to={'/'} className="relative block lg:hidden ml-5">
         <h2 className="text-xl md:text-2xl font-extrabold mt-5 ml-3 p-3">
           ZapShift
         </h2>
         <img src={logo} alt="logo" className="absolute w-10 -top-2 p-1" />
-      </div>
+      </Link>
       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 w-10/12 lg:w-11/12 mx-auto">
         <div className="md:py-10">
-          <div className="relative hidden lg:block">
+          <Link to={'/'} className="relative hidden lg:block">
             <h2 className="text-xl md:text-2xl font-extrabold ml-3 p-3">
               ZapShift
             </h2>
             <img src={logo} alt="logo" className="absolute w-10 -top-2 p-1" />
-          </div>
+          </Link>
           <div className="full lg:w-110 mx-auto space-y-5 lg:py-10">
             <div className="">
               <h1 className="text-4xl md:text-5xl font-bold">
@@ -98,12 +111,12 @@ const Login = () => {
             </form>
             <h1>
               Don’t have any account?{" "}
-              <Link to={"/register"} className="text-lime-600 hover:underline">
+              <Link state={location.state} to={"/register"} className="text-lime-600 hover:underline">
                 Register
               </Link>
             </h1>
             <div className="divider">OR</div>
-            <button className="btn bg-gray-100 border-none text-lg text-black border-[#e5e5e5] w-full p-5">
+            <button onClick={handleGoogleSignIn} className="btn bg-gray-100 border-none text-lg text-black border-[#e5e5e5] w-full p-5">
               <FcGoogle size={28} />
               Login with Google
             </button>

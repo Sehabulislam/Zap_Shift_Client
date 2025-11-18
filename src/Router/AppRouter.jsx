@@ -9,6 +9,7 @@ import BeRider from "../pages/BeRider";
 import Error from "../pages/Error";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -21,11 +22,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <Services></Services> ,
+        element: <Services></Services>,
       },
       {
         path: "/coverage",
-        loader : () => fetch("/serviceCenter.json"),
+        loader: () => fetch("/serviceCenter.json"),
         element: <Coverage></Coverage>,
       },
       {
@@ -37,21 +38,25 @@ export const router = createBrowserRouter([
         element: <Pricing></Pricing>,
       },
       {
-        path: "/aRider",
-        element: <BeRider></BeRider>,
+        path: "/rider",
+        element: (
+          <PrivateRoute>
+            <BeRider></BeRider>
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",
-        element: <Error></Error> ,
+        element: <Error></Error>,
       },
     ],
   },
   {
-    path : '/login',
-    element : <Login></Login>
+    path: "/login",
+    element: <Login></Login>,
   },
   {
-    path : '/register',
-    element : <Register></Register>
-  }
+    path: "/register",
+    element: <Register></Register>,
+  },
 ]);
