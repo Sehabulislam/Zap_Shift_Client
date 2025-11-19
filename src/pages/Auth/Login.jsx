@@ -8,42 +8,42 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { signInUser,googleSignIn,setUser } = useAuth();
+  const { signInUser, googleSignIn, setUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation()
-  console.log('in the login page',location);
+  const location = useLocation();
+  console.log("in the login page", location);
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleLogin = (data) => {
-
     signInUser(data.email, data.password)
       .then((result) => {
         setUser(result);
         toast.success("Your Account Create Successfully.");
-        navigate(location?.state || '/');
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
-  const handleGoogleSignIn =()=>{
+  const handleGoogleSignIn = () => {
     googleSignIn()
-    .then(result =>{
-      setUser(result.user);
-      toast.success("Your Account Create Successfully.");
-        navigate(location?.state || '/');
-    }).catch(error =>{
-      toast.error(error.message);
-    })
-  }
+      .then((result) => {
+        setUser(result.user);
+        toast.success("Your Account Create Successfully.");
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="pb-10">
-      <Link to={'/'} className="relative block lg:hidden ml-5">
+      <Link to={"/"} className="relative block lg:hidden ml-5">
         <h2 className="text-xl md:text-2xl font-extrabold mt-5 ml-3 p-3">
           ZapShift
         </h2>
@@ -51,7 +51,7 @@ const Login = () => {
       </Link>
       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 w-10/12 lg:w-11/12 mx-auto">
         <div className="md:py-10">
-          <Link to={'/'} className="relative hidden lg:block">
+          <Link to={"/"} className="relative hidden lg:block">
             <h2 className="text-xl md:text-2xl font-extrabold ml-3 p-3">
               ZapShift
             </h2>
@@ -59,9 +59,7 @@ const Login = () => {
           </Link>
           <div className="full lg:w-110 mx-auto space-y-5 lg:py-10">
             <div className="">
-              <h1 className="text-4xl md:text-5xl font-bold">
-                Welcome Back
-              </h1>
+              <h1 className="text-4xl md:text-5xl font-bold">Welcome Back</h1>
               <h4 className="text-xl md:text-2xl">Register with ZapShift</h4>
             </div>
             <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
@@ -111,12 +109,19 @@ const Login = () => {
             </form>
             <h1>
               Don’t have any account?{" "}
-              <Link state={location.state} to={"/register"} className="text-lime-600 hover:underline">
+              <Link
+                state={location.state}
+                to={"/register"}
+                className="text-lime-600 hover:underline"
+              >
                 Register
               </Link>
             </h1>
             <div className="divider">OR</div>
-            <button onClick={handleGoogleSignIn} className="btn bg-gray-100 border-none text-lg text-black border-[#e5e5e5] w-full p-5">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn bg-gray-100 border-none text-lg text-black border-[#e5e5e5] w-full p-5"
+            >
               <FcGoogle size={28} />
               Login with Google
             </button>

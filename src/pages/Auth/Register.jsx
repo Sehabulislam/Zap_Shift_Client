@@ -10,7 +10,7 @@ import axios from "axios";
 const Register = () => {
   const { registerUser, setUser, updateUserProfile, googleSignIn } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   console.log(location);
   const {
     register,
@@ -41,7 +41,7 @@ const Register = () => {
                 userProfile,
               });
               toast.success("Your Account Login Successfully.");
-              navigate(location?.state || '/');
+              navigate(location?.state || "/");
             })
             .catch((error) => {
               toast.error(error.message);
@@ -57,7 +57,7 @@ const Register = () => {
       .then((result) => {
         setUser(result.user);
         toast.success("Your Account Create Successfully.");
-        navigate(location?.state || '/');
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -161,7 +161,11 @@ const Register = () => {
             </form>
             <h1>
               Already have an account?{" "}
-              <Link state={location.stated} to={"/login"} className="text-lime-600 hover:underline">
+              <Link
+                state={location.stated}
+                to={"/login"}
+                className="text-lime-600 hover:underline"
+              >
                 Login
               </Link>
             </h1>

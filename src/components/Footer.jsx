@@ -1,6 +1,7 @@
 import { FaFacebook, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -17,10 +18,10 @@ const Footer = () => {
         </p>
       </div>
       <nav className="grid grid-flow-col gap-4 md:text-lg">
-        <a className="link link-hover">Services</a>
-        <a className="link link-hover">Coverage</a>
-        <a className="link link-hover">About Us</a>
-        <a className="link link-hover">Pricing</a>
+        <Link to={'/services'} className="link link-hover">Services</Link>
+        <Link to={'/coverage'} className="link link-hover">Coverage</Link>
+        <Link to={'/aboutUs'} className="link link-hover">About Us</Link>
+        <Link to={'/pricing'} className="link link-hover">Pricing</Link>
         <a className="link link-hover">Blog</a>
         <a className="link link-hover">Contact</a>
       </nav>

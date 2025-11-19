@@ -22,12 +22,12 @@ const Coverage = () => {
     }
   };
   return (
-    <div className="md:w-8xl mx-auto rounded-2xl p-5 md:p-10 bg-white text-[#03373D] space-y-5">
+    <div className="md:w-8xl mx-auto rounded-2xl p-5 md:px-15 md:py-15 bg-white text-[#03373D] space-y-5">
       <h1 className="text-3xl md:text-5xl font-bold ">
         We are available in 64 districts
       </h1>
       <form onSubmit={handleSearchCenter}>
-        <label className="input rounded-full w-50">
+        <label className="input rounded-full md:w-full max-w-lg">
           <FaSearchLocation size={23} />
           <input
             type="search"
@@ -44,7 +44,7 @@ const Coverage = () => {
           Search
         </button>
       </form>
-      <h1 className="border border-gray-300 mt-10"></h1>
+      <h1 className="border border-gray-300 mt-7"></h1>
       <h1 className="text-2xl font-bold">
         We deliver almost all over Bangladesh
       </h1>
