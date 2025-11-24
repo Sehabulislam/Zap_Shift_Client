@@ -29,14 +29,6 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to={"/services"}
-        className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
-        }
-      >
-        Services
-      </NavLink>
-      <NavLink
         to={"/coverage"}
         className={({ isActive }) =>
           isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
@@ -76,6 +68,18 @@ const Navbar = () => {
       >
         Be a Rider
       </NavLink>
+      {
+        user && <>
+        <NavLink
+        to={"/dashboard/myParcels"}
+        className={({ isActive }) =>
+          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+        }
+      >
+        My Parcel
+      </NavLink>
+        </>
+      }
     </>
   );
   return (
