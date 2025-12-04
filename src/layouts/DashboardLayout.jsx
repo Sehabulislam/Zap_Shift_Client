@@ -1,22 +1,24 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
-import { RiSidebarUnfoldFill } from "react-icons/ri";
+import { RiChatSettingsLine, RiSidebarUnfoldFill } from "react-icons/ri";
 import logo from "../assets/logo.png";
 import { TbLayoutDashboardFilled, TbTruckDelivery } from "react-icons/tb";
-import { LiaFileInvoiceSolid } from "react-icons/lia";
-import { IoStorefrontSharp } from "react-icons/io5";
-import { IoIosPricetags } from "react-icons/io";
-import { PiMapPinAreaFill } from "react-icons/pi";
+import { BiSolidDetail } from "react-icons/bi";
 import { LuSettings2 } from "react-icons/lu";
-import { MdPassword } from "react-icons/md";
+import {
+  MdHistory,
+  MdLibraryAdd,
+  MdPassword,
+} from "react-icons/md";
 import { MdOutlineHelp } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
+import { FaRegCreditCard } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const menuLinks = (
     <>
       <NavLink
-        to={"/dashboard"}
+        to={"/dashboard/myParcels"}
         className={({ isActive }) =>
           isActive
             ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
@@ -28,70 +30,72 @@ const DashboardLayout = () => {
         <span className="is-drawer-close:hidden text-lg">Dashboard</span>
       </NavLink>
       <NavLink
-        to={"/dashboard/deliveries"}
+        to={"/dashboard/addParcel"}
         className={({ isActive }) =>
           isActive
             ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
             : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
         }
-        data-tip="Deliveries"
+        data-tip="Add Parcel"
+      >
+        <MdLibraryAdd size={25} />
+        <span className="is-drawer-close:hidden text-lg">Add Parcel</span>
+      </NavLink>
+      <NavLink
+        to={"/dashboard/paymentHistory"}
+        className={({ isActive }) =>
+          isActive
+            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+        }
+        data-tip="Payment History"
+      >
+        <FaRegCreditCard size={25} />
+        <span className="is-drawer-close:hidden text-lg">Payment History</span>
+      </NavLink>
+
+      <NavLink
+        to={"/dashboard/parcelDetails"}
+        className={({ isActive }) =>
+          isActive
+            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+        }
+        data-tip="Parcel Details"
+      >
+        <BiSolidDetail size={25} />
+        <span className="is-drawer-close:hidden text-lg">Parcel Details</span>
+      </NavLink>
+      <NavLink
+        to={"/dashboard/manageParcel"}
+        className={({ isActive }) =>
+          isActive
+            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+        }
+        data-tip="Manage Parcel"
+      >
+        <RiChatSettingsLine size={25} />
+        <span className="is-drawer-close:hidden text-lg">Manage Parcel</span>
+      </NavLink>
+      <NavLink
+        to={"/dashboard/allDeliveries"}
+        className={({ isActive }) =>
+          isActive
+            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
+        }
+        data-tip="All Deliveries"
       >
         <TbTruckDelivery size={25} />
-        <span className="is-drawer-close:hidden text-lg">Deliveries</span>
-      </NavLink>
-      <NavLink
-        to={"/dashboard/invoices"}
-        className={({ isActive }) =>
-          isActive
-            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-        }
-        data-tip="Invoices"
-      >
-        <LiaFileInvoiceSolid size={25} />
-        <span className="is-drawer-close:hidden text-lg">Invoices</span>
-      </NavLink>
-      <NavLink
-        to={"/dashboard/stores"}
-        className={({ isActive }) =>
-          isActive
-            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-        }
-        data-tip="Stores"
-      >
-        <IoStorefrontSharp size={25} />
-        <span className="is-drawer-close:hidden text-lg">Stores</span>
-      </NavLink>
-      <NavLink
-        to={"/dashboard/pricingPlan"}
-        className={({ isActive }) =>
-          isActive
-            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-        }
-        data-tip="Pricing Plan"
-      >
-        <IoIosPricetags size={25} />
-        <span className="is-drawer-close:hidden text-lg">Pricing Plan</span>
-      </NavLink>
-      <NavLink
-        to={"/dashboard/coverageArea"}
-        className={({ isActive }) =>
-          isActive
-            ? "btn bg-[#CAEB66] rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-            : "btn btn-ghost is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
-        }
-        data-tip="Coverage Area"
-      >
-        <PiMapPinAreaFill size={25} />
-        <span className="is-drawer-close:hidden text-lg">Coverage Area</span>
+        <span className="is-drawer-close:hidden text-lg">All Deliveries</span>
       </NavLink>
     </>
   );
   const generalLinks = (
     <>
-      <Link to={'/dashboard/settings'}
+      <Link
+        to={"/dashboard/settings"}
         className="btn btn-ghost rounded-xl is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center"
         data-tip="Settings"
       >

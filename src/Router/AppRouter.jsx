@@ -17,6 +17,10 @@ import Teams from "../pages/AboutUs/Teams";
 import Services from "../pages/Home/Services";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyParcels from "../pages/DashPages/MyParcels";
+import Payment from "../pages/DashPages/Payment/Payment";
+import PaymentSuccess from "../pages/DashPages/Payment/PaymentSuccess";
+import PaymentCancel from "../pages/DashPages/Payment/PaymentCancel";
+import PaymentHistory from "../pages/DashPages/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/coverage",
-        loader: () => fetch("/serviceCenter.json"),
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
         element: <Coverage></Coverage>,
       },
       {
@@ -96,6 +100,22 @@ export const router = createBrowserRouter([
       {
         path: "myParcels",
         element: <MyParcels></MyParcels>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "payment/:parcelId",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "payment-cancelled",
+        element: <PaymentCancel></PaymentCancel>,
       },
     ],
   },

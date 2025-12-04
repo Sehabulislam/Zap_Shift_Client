@@ -23,7 +23,9 @@ const Navbar = () => {
       <NavLink
         to={"/"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
         Home
@@ -31,7 +33,9 @@ const Navbar = () => {
       <NavLink
         to={"/coverage"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
         Coverage
@@ -39,7 +43,9 @@ const Navbar = () => {
       <NavLink
         to={"/aboutUs"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
         About Us
@@ -47,15 +53,19 @@ const Navbar = () => {
       <NavLink
         to={"/pricing"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
-       Pricing
+        Pricing
       </NavLink>
       <NavLink
         to={"/sendParcel"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
         Send Parcel
@@ -63,23 +73,27 @@ const Navbar = () => {
       <NavLink
         to={"/rider"}
         className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
+          isActive
+            ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+            : "text-gray-500"
         }
       >
         Be a Rider
       </NavLink>
-      {
-        user && <>
-        <NavLink
-        to={"/dashboard/myParcels"}
-        className={({ isActive }) =>
-          isActive ? "bg-[#CAEB66] py-3 px-5 rounded-full text-lg" : "text-gray-500"
-        }
-      >
-        My Parcel
-      </NavLink>
+      {user && (
+        <>
+          <NavLink
+            to={"/dashboard/myParcels"}
+            className={({ isActive }) =>
+              isActive
+                ? "md:bg-[#CAEB66] md:py-3 md:px-5 border-b-2 md:border-0 border-[#CAEB66] md:rounded-full text-lg"
+                : "text-gray-500"
+            }
+          >
+            My Parcel
+          </NavLink>
         </>
-      }
+      )}
     </>
   );
   return (
@@ -87,7 +101,7 @@ const Navbar = () => {
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <TbMenu4 size={30}/>
+            <TbMenu4 size={30} />
           </div>
           <ul
             tabIndex="-1"
@@ -104,7 +118,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-5 flex items-center text-lg">{links}</ul>
+        <ul className="menu menu-horizontal px-1 gap-5 flex items-center text-lg">
+          {links}
+        </ul>
       </div>
       <div className="navbar-end">
         {user ? (
@@ -115,12 +131,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  src={
-                    user.photoURL ||
-                    "https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png"
-                  }
-                />
+                <img src={user.photoURL} />
               </div>
             </div>
             <ul
